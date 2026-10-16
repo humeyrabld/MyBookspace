@@ -114,7 +114,9 @@ public class AuthController : ControllerBase
         {
             HttpOnly = true,
             Secure = !HttpContext.Request.IsHttps ? false : true,
-            SameSite = SameSiteMode.Lax,
+            SameSite = HttpContext.Request.IsHttps
+                ? SameSiteMode.None
+                : SameSiteMode.Lax,
             Path = "/api/auth",
             Expires = new DateTimeOffset(expires)
         });
@@ -123,7 +125,9 @@ public class AuthController : ControllerBase
     private void ClearCookie() => Response.Cookies.Delete(CookieName, new CookieOptions
     {
         Path = "/api/auth",
-        SameSite = SameSiteMode.Lax,
+        SameSite = HttpContext.Request.IsHttps
+            ? SameSiteMode.None
+            : SameSiteMode.Lax,
         Secure = HttpContext.Request.IsHttps
     });
 
