@@ -14,7 +14,7 @@ export interface Book {
 })
 export class BooksService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:5070/api/books';
+  private apiUrl = 'https://mybookspace.onrender.com/api/books';
 
   getBooks() {
     return this.http.get<Book[]>(this.apiUrl);

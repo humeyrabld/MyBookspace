@@ -7,7 +7,7 @@ interface LoginResponse { token: string; email: string; }
 @Injectable({ providedIn: 'root' })
 export class Auth {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:5070/api/auth';
+  private apiUrl = 'https://mybookspace.onrender.com/api/auth';
   private refreshInProgress$: Observable<string | null> | null = null;
 
   login(email: string, password: string) {

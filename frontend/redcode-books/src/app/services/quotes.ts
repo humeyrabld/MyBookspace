@@ -13,7 +13,7 @@ export interface Quote {
 })
 export class QuotesService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:5070/api/quotes';
+  private apiUrl = 'https://mybookspace.onrender.com/api/quotes';
 
   getQuotes() {
     return this.http.get<Quote[]>(this.apiUrl);
