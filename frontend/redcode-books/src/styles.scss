@@ -1,0 +1,101 @@
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+
+:root {
+  font-family: Inter, Arial, sans-serif;
+  color: #f8fafc;
+  background: #080e1c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+/* BOOKSPACE theme button */
+.nav-actions { display: flex; align-items: center; gap: 12px; }
+.theme-toggle {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 11px 15px; border: 1px solid #ffffff25;
+  border-radius: 12px; background: #ffffff08;
+  color: #f8fafc; cursor: pointer;
+  transition: transform .2s, border-color .2s;
+}
+.theme-toggle:hover { transform: translateY(-2px); border-color: #7796ff; }
+.theme-toggle:focus-visible { outline: 2px solid #7796ff; outline-offset: 3px; }
+
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="light"] body { background: #f4f7fc; color: #172443; }
+:root[data-theme="light"] .app-shell,
+:root[data-theme="light"] .quotes-page { background: #f4f7fc; color: #172443; }
+:root[data-theme="light"] .navbar-custom { border-bottom-color: #dce4f1; }
+:root[data-theme="light"] .brand,
+:root[data-theme="light"] .nav-links a.active,
+:root[data-theme="light"] .nav-links a:hover { color: #172443; }
+:root[data-theme="light"] .nav-links a { color: #526482; }
+:root[data-theme="light"] .profile-btn,
+:root[data-theme="light"] .theme-toggle {
+  background: #fff; color: #172443; border-color: #dce4f1;
+}
+:root[data-theme="light"] .hero,
+:root[data-theme="light"] .quotes-hero {
+  background: linear-gradient(120deg,#e0eaff,#edf2ff 65%,#fff);
+  border-color: #dce4f1;
+}
+:root[data-theme="light"] .hero-content h1,
+:root[data-theme="light"] .quotes-hero h1,
+:root[data-theme="light"] .section-heading h2 { color: #172443; }
+:root[data-theme="light"] .hero-content p,
+:root[data-theme="light"] .quotes-hero p,
+:root[data-theme="light"] .section-heading p,
+:root[data-theme="light"] .section-heading .muted { color: #526482; }
+:root[data-theme="light"] .hero-content h1 em,
+:root[data-theme="light"] .quotes-hero h1 em,
+:root[data-theme="light"] .eyebrow,
+:root[data-theme="light"] .book-category,
+:root[data-theme="light"] .quote-icon { color: #3759ba; }
+:root[data-theme="light"] .search-box,
+:root[data-theme="light"] .book-card,
+:root[data-theme="light"] .quote-card {
+  background: #fff; border-color: #dce4f1; color: #172443;
+}
+:root[data-theme="light"] .search-box input { color: #172443; }
+:root[data-theme="light"] .search-box input::placeholder { color: #526482; }
+:root[data-theme="light"] .book-info p,
+:root[data-theme="light"] .book-footer,
+:root[data-theme="light"] .quote-bottom,
+:root[data-theme="light"] .library-message,
+:root[data-theme="light"] .book-actions button,
+:root[data-theme="light"] .quote-actions button { color: #526482; }
+:root[data-theme="light"] .book-footer,
+:root[data-theme="light"] .quote-bottom { border-top-color: #dce4f1; }
+:root[data-theme="light"] .empty-state {
+  border-color: #dce4f1; color: #526482;
+}
+:root[data-theme="light"] .empty-state h3 { color: #172443; }
+:root[data-theme="light"] .book-modal,
+:root[data-theme="light"] .quote-modal {
+  background: #fff; color: #172443; border-color: #dce4f1;
+}
+:root[data-theme="light"] .book-modal input,
+:root[data-theme="light"] .quote-modal input,
+:root[data-theme="light"] .quote-modal textarea {
+  background: #f6f8fd; color: #172443; border-color: #dce4f1;
+}
+:root[data-theme="light"] .book-modal input[type="date"] { color-scheme: light; }
+:root[data-theme="light"] .cancel-btn { color: #172443; border-color: #dce4f1; }
+:root[data-theme="light"] .close-btn { color: #526482; }
+@media (max-width: 480px) {
+  .nav-actions { gap: 8px; }
+  .theme-toggle { padding: 11px; }
+  .theme-toggle span { display: none; }
+}

@@ -1,0 +1,151 @@
+
+<div class="quotes-page">
+  <header class="navbar-custom">
+    <a class="brand" routerLink="/">
+      <i class="fa-solid fa-book-open"></i>
+      <span>BOOK<span class="brand-accent">SPACE</span></span>
+    </a>
+
+    <nav class="nav-links">
+      <a routerLink="/">Böcker</a>
+      <a class="active" routerLink="/quotes">Mina citat</a>
+    </nav>
+
+    
+    <button
+      class="theme-btn"
+      type="button"
+      (click)="theme.toggle()"
+      [attr.aria-label]="theme.isLight() ? 'Aktivera mörkt tema' : 'Aktivera ljust tema'"
+      [attr.title]="theme.isLight() ? 'Mörkt tema' : 'Ljust tema'"
+    >
+      <i [class]="theme.isLight() ? 'fa-solid fa-moon' : 'fa-solid fa-sun'"></i>
+      <span>{{ theme.isLight() ? 'Mörkt' : 'Ljust' }}</span>
+    </button>
+
+    <button class="profile-btn" type="button" (click)="logout()">
+      <i class="fa-solid fa-arrow-right-from-bracket"></i>
+      Logga ut
+    </button>
+  </header>
+
+  <main class="container py-5">
+    <section class="quotes-hero">
+      <span class="eyebrow">ORD SOM STANNAR KVAR</span>
+      <h1>Mina <em>citat.</em></h1>
+      <p>
+        En plats för orden som inspirerar, berör och betyder något.
+      </p>
+
+      <button class="primary-btn" type="button" (click)="openAddForm()">
+        <i class="fa-solid fa-plus"></i>
+        Lägg till citat
+      </button>
+    </section>
+
+    <section class="quotes-section">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">DIN SAMLING</span>
+          <h2>Sparade citat</h2>
+          <p>{{ quotes.length }} citat i din samling.</p>
+        </div>
+      </div>
+
+      <div *ngIf="error" class="alert alert-danger">
+        {{ error }}
+      </div>
+
+      <p *ngIf="loading" class="muted">
+        Hämtar citat...
+      </p>
+
+      <div *ngIf="!loading && quotes.length === 0" class="empty-state">
+        <i class="fa-solid fa-quote-left"></i>
+        <h3>Inga citat ännu</h3>
+        <p>Lägg till ett citat som betyder något för dig.</p>
+      </div>
+
+      <div class="quotes-grid" *ngIf="!loading">
+        <article class="quote-card" *ngFor="let quote of quotes">
+          <i class="fa-solid fa-quote-left quote-icon"></i>
+
+          <blockquote>{{ quote.text }}</blockquote>
+
+          <div class="quote-bottom">
+            <span>— {{ quote.author }}</span>
+
+            <div class="quote-actions">
+              <button type="button" title="Redigera"
+                      (click)="openEditForm(quote)">
+                <i class="fa-solid fa-pen"></i>
+              </button>
+
+              <button type="button" title="Ta bort"
+                      (click)="deleteQuote(quote)">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-backdrop-custom" *ngIf="showForm"
+       (click)="closeForm()">
+    <section class="quote-modal"
+             role="dialog"
+             aria-modal="true"
+             aria-labelledby="quote-form-title"
+             (click)="$event.stopPropagation()">
+
+      <div class="modal-top">
+        <h2 id="quote-form-title">
+          {{ editingId === null ? 'Lägg till citat' : 'Redigera citat' }}
+        </h2>
+
+        <button type="button" class="close-btn"
+                aria-label="Stäng"
+                (click)="closeForm()">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form (ngSubmit)="saveQuote()" #quoteForm="ngForm">
+        <label for="quoteText">Citat</label>
+        <textarea
+          id="quoteText"
+          name="text"
+          rows="4"
+          [(ngModel)]="form.text"
+          placeholder="Skriv ditt citat..."
+          required
+        ></textarea>
+
+        <label for="quoteAuthor">Författare</label>
+        <input
+          id="quoteAuthor"
+          name="author"
+          type="text"
+          [(ngModel)]="form.author"
+          placeholder="Vem sa eller skrev det?"
+          required
+        />
+
+        <div class="modal-actions">
+          <button type="button" class="cancel-btn"
+                  (click)="closeForm()">
+            Avbryt
+          </button>
+
+          <button type="submit" class="primary-btn"
+                  [disabled]="quoteForm.invalid || saving">
+            {{ saving ? 'Sparar...' : 'Spara citat' }}
+          </button>
+        </div>
+      </form>
+    </section>
+  </div>
+</div>
+

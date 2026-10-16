@@ -1,0 +1,42 @@
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/
+
+# .NET
+**/bin/
+**/obj/
+**/.vs/
+**/appsettings.Development.json
+**/appsettings.Production.json
+**/appsettings.Local.json
+**/secrets.json
+
+# Angular / Node
+**/node_modules/
+**/dist/
+**/.angular/
+**/coverage/
+**/.env
+**/.env.*
+!**/.env.example
+
+# Local backups
+*.backup
+*.broken
+*.before-fix-*
+
+# Local database files
+*.db
+*.db-shm
+*.db-wal
+
+# Certificates and keys
+*.pfx
+*.pem
+*.key
+
+# Extra backup files
+*.bak
+*.bak-*

@@ -1,0 +1,147 @@
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 20px;
+  background:
+    radial-gradient(circle at 50% 15%, #1b3261 0%, transparent 45%),
+    #080e1c;
+  color: #f8fafc;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 440px;
+  padding: 44px 38px;
+  border: 1px solid #ffffff17;
+  border-radius: 24px;
+  background: #111a2c;
+  box-shadow: 0 25px 80px #00000035;
+}
+
+.login-icon {
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 26px;
+  border-radius: 15px;
+  background: #7796ff20;
+  color: #91aaff;
+  font-size: 24px;
+}
+
+.eyebrow {
+  color: #91aaff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+h1 {
+  margin: 12px 0;
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.subtitle {
+  margin-bottom: 32px;
+  color: #9ba9c0;
+  line-height: 1.7;
+}
+
+label {
+  display: block;
+  margin: 18px 0 9px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.input-group-custom {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 16px;
+  border: 1px solid #ffffff1a;
+  border-radius: 12px;
+  background: #0c1424;
+  color: #8798b5;
+
+  &:focus-within {
+    border-color: #7796ff;
+  }
+
+  input {
+    width: 100%;
+    padding: 15px 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #fff;
+  }
+}
+
+.login-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 28px;
+  padding: 15px;
+  border: none;
+  border-radius: 12px;
+  background: #7996ff;
+  color: #071022;
+  font-weight: 800;
+  transition: 0.2s;
+
+  &:hover:not(:disabled) {
+    background: #a0b5ff;
+    transform: translateY(-2px);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.error {
+  margin-top: 15px;
+  color: #ff8d9a;
+  font-size: 13px;
+}
+
+.register-text {
+  margin-top: 28px;
+  text-align: center;
+  color: #9ba9c0;
+
+  a {
+    color: #91aaff;
+    font-weight: 700;
+    text-decoration: none;
+  }
+}
+
+.back-link {
+  display: block;
+  margin-top: 28px;
+  text-align: center;
+  color: #8d9ab1;
+  text-decoration: none;
+  font-size: 13px;
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-card {
+    padding: 32px 24px;
+  }
+}

@@ -1,0 +1,261 @@
+<div class="app-shell">
+  <!-- NAVBAR -->
+  <header class="navbar-custom">
+    <a class="brand" routerLink="/">
+      <i class="fa-solid fa-book-open"></i>
+      <span>
+        BOOK<span class="brand-accent">SPACE</span>
+      </span>
+    </a>
+
+    <nav class="nav-links">
+      <a class="active" routerLink="/">Böcker</a>
+      <a routerLink="/quotes">Mina citat</a>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="theme-toggle" type="button"
+              (click)="toggleTheme()"
+              [attr.aria-label]="theme.isLight() ? 'Aktivera mörkt tema' : 'Aktivera ljust tema'"
+              [attr.title]="theme.isLight() ? 'Mörkt tema' : 'Ljust tema'">
+        <i [class]="theme.isLight() ? 'fa-solid fa-moon' : 'fa-solid fa-sun'"></i>
+        <span>{{ theme.isLight() ? 'Mörkt' : 'Ljust' }}</span>
+      </button>
+    <button
+      class="profile-btn"
+      type="button"
+      (click)="logout()"
+    >
+      <i class="fa-solid fa-arrow-right-from-bracket"></i>
+      Logga ut
+    </button>
+    </div>
+  </header>
+
+  <main class="container py-5">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-content">
+        <span class="eyebrow">
+          DITT PERSONLIGA BIBLIOTEK
+        </span>
+
+        <h1>
+          En värld av <em>berättelser.</em>
+        </h1>
+
+        <p>
+          Samla dina favoritböcker, upptäck nya berättelser
+          och spara orden som inspirerar dig.
+        </p>
+
+        <button
+          class="primary-btn"
+          type="button"
+          (click)="openAddForm()"
+        >
+          <i class="fa-solid fa-plus"></i>
+          Lägg till bok
+        </button>
+      </div>
+
+      <div class="hero-decoration">
+        <i class="fa-solid fa-book-open-reader"></i>
+      </div>
+    </section>
+
+    <!-- BIBLIOTEK -->
+    <section class="library-section">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">DIN SAMLING</span>
+          <h2>Mitt bibliotek</h2>
+          <p>{{ books.length }} böcker i din samling.</p>
+        </div>
+
+        <!-- SÖK -->
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+
+          <input
+            type="text"
+            placeholder="Sök efter en bok..."
+            [(ngModel)]="searchTerm"
+          />
+        </div>
+      </div>
+
+      <!-- FELMEDDELANDE -->
+      <div *ngIf="error" class="alert alert-danger">
+        {{ error }}
+      </div>
+
+      <!-- LADDNING -->
+      <p *ngIf="loading" class="library-message">
+        <i class="fa-solid fa-spinner fa-spin"></i>
+        Hämtar böcker...
+      </p>
+
+      <!-- TOMT BIBLIOTEK -->
+      <div
+        *ngIf="!loading && filteredBooks.length === 0"
+        class="empty-state"
+      >
+        <i class="fa-solid fa-book-open"></i>
+
+        <h3>Inga böcker hittades</h3>
+
+        <p>
+          {{ searchTerm
+            ? 'Prova en annan sökning.'
+            : 'Börja med att lägga till din första bok.' }}
+        </p>
+      </div>
+
+      <!-- BOKKORT -->
+      <div class="book-grid" *ngIf="!loading">
+        <article
+          class="book-card"
+          *ngFor="let book of filteredBooks"
+        >
+          <div class="book-cover cover-one">
+            <i class="fa-solid fa-book"></i>
+          </div>
+
+          <div class="book-info">
+            <span class="book-category">
+              MIN SAMLING
+            </span>
+
+            <h3>{{ book.title }}</h3>
+            <p>{{ book.author }}</p>
+
+            <div class="book-footer">
+              <span>
+                <i class="fa-regular fa-calendar"></i>
+                {{ book.publishedDate | date:'yyyy' }}
+              </span>
+
+              <!-- REDIGERA / TA BORT -->
+              <div class="book-actions">
+                <button
+                  type="button"
+                  title="Redigera bok"
+                  (click)="openEditForm(book)"
+                >
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+
+                <button
+                  type="button"
+                  title="Ta bort bok"
+                  (click)="deleteBook(book)"
+                >
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- MODAL: LÄGG TILL / REDIGERA -->
+  <div
+    class="modal-backdrop-custom"
+    *ngIf="showForm"
+    (click)="closeForm()"
+  >
+    <section
+      class="book-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="book-form-title"
+      (click)="$event.stopPropagation()"
+    >
+      <div class="modal-top">
+        <div>
+          <span class="eyebrow">
+            DITT BIBLIOTEK
+          </span>
+
+          <h2 id="book-form-title">
+            {{ editingId === null
+              ? 'Lägg till bok'
+              : 'Redigera bok' }}
+          </h2>
+        </div>
+
+        <button
+          type="button"
+          class="close-btn"
+          aria-label="Stäng"
+          (click)="closeForm()"
+        >
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form
+        (ngSubmit)="saveBook()"
+        #bookForm="ngForm"
+      >
+        <label for="title">Boktitel</label>
+
+        <input
+          id="title"
+          name="title"
+          type="text"
+          [(ngModel)]="form.title"
+          placeholder="Ange bokens titel"
+          required
+        />
+
+        <label for="author">Författare</label>
+
+        <input
+          id="author"
+          name="author"
+          type="text"
+          [(ngModel)]="form.author"
+          placeholder="Ange författare"
+          required
+        />
+
+        <label for="publishedDate">
+          Publiceringsdatum
+        </label>
+
+        <input
+          id="publishedDate"
+          name="publishedDate"
+          type="date"
+          [(ngModel)]="form.publishedDate"
+          required
+        />
+
+        <div class="modal-actions">
+          <button
+            type="button"
+            class="cancel-btn"
+            (click)="closeForm()"
+          >
+            Avbryt
+          </button>
+
+          <button
+            type="submit"
+            class="primary-btn"
+            [disabled]="bookForm.invalid || saving"
+          >
+            <i class="fa-solid fa-check"></i>
+
+            {{ saving ? 'Sparar...' : 'Spara bok' }}
+          </button>
+        </div>
+      </form>
+    </section>
+  </div>
+</div>

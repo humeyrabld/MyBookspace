@@ -1,0 +1,65 @@
+<div class="login-page">
+  <div class="login-card">
+    <div class="login-icon">
+      <i class="fa-solid fa-book-open"></i>
+    </div>
+
+    <span class="eyebrow">VÄLKOMMEN TILLBAKA</span>
+
+    <h1>Logga in</h1>
+
+    <p class="subtitle">
+      Fortsätt där du slutade. Ditt bibliotek väntar på dig.
+    </p>
+
+    <form (ngSubmit)="login()" #loginForm="ngForm">
+      <label for="email">E-postadress</label>
+      <div class="input-group-custom">
+        <i class="fa-regular fa-envelope"></i>
+        <input
+          id="email"
+          type="email"
+          name="email"
+          [(ngModel)]="email"
+          placeholder="namn@exempel.se"
+          required
+          email
+        />
+      </div>
+
+      <label for="password">Lösenord</label>
+      <div class="input-group-custom">
+        <i class="fa-solid fa-lock"></i>
+        <input
+          id="password"
+          type="password"
+          name="password"
+          [(ngModel)]="password"
+          placeholder="Ditt lösenord"
+          required
+        />
+      </div>
+
+      <p class="error" *ngIf="error">{{ error }}</p>
+
+      <button
+        class="login-btn"
+        type="submit"
+        [disabled]="loginForm.invalid || loading"
+      >
+        <span>{{ loading ? 'Loggar in...' : 'Logga in' }}</span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </form>
+
+    <p class="register-text">
+      Har du inget konto?
+      <a routerLink="/register">Skapa konto</a>
+    </p>
+
+    <a class="back-link" routerLink="/">
+      <i class="fa-solid fa-arrow-left"></i>
+      Tillbaka till biblioteket
+    </a>
+  </div>
+</div>

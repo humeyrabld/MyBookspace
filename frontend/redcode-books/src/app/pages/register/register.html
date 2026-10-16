@@ -1,0 +1,108 @@
+
+<div class="register-page">
+  <a class="brand" routerLink="/">
+    <i class="fa-solid fa-book-open"></i>
+    <span>BOOK<span>SPACE</span></span>
+  </a>
+
+  <div class="register-layout">
+    <section class="welcome-panel">
+      <span class="eyebrow">VÄLKOMMEN TILL BOOKSPACE</span>
+
+      <h1>
+        Din nästa historia
+        <em>börjar här.</em>
+      </h1>
+
+      <p>
+        Skapa ditt personliga bibliotek, samla böckerna du älskar
+        och spara citaten som inspirerar dig.
+      </p>
+
+      <div class="illustration">
+        <i class="fa-solid fa-book-open-reader"></i>
+      </div>
+    </section>
+
+    <section class="register-card">
+      <span class="eyebrow">BLI MEDLEM</span>
+      <h2>Skapa konto</h2>
+      <p class="subtitle">Börja samla dina berättelser idag.</p>
+
+      <div *ngIf="error" class="message error">
+        {{ error }}
+      </div>
+
+      <div *ngIf="success" class="message success">
+        {{ success }}
+      </div>
+
+      <form (ngSubmit)="register()" #registerForm="ngForm">
+        <label for="email">E-postadress</label>
+
+        <div class="input-wrapper">
+          <i class="fa-regular fa-envelope"></i>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="din@email.se"
+            [(ngModel)]="email"
+            required
+            email
+            autocomplete="email"
+          />
+        </div>
+
+        <label for="password">Lösenord</label>
+
+        <div class="input-wrapper">
+          <i class="fa-solid fa-lock"></i>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            placeholder="Minst 6 tecken"
+            [(ngModel)]="password"
+            required
+            minlength="6"
+            autocomplete="new-password"
+          />
+        </div>
+
+        <p class="password-hint">
+          Minst 6 tecken, inklusive en liten bokstav och en siffra.
+        </p>
+
+        <label for="confirmPassword">Bekräfta lösenord</label>
+
+        <div class="input-wrapper">
+          <i class="fa-solid fa-shield-halved"></i>
+          <input
+            id="confirmPassword"
+            name="confirmPassword"
+            type="password"
+            placeholder="Skriv lösenordet igen"
+            [(ngModel)]="confirmPassword"
+            required
+            autocomplete="new-password"
+          />
+        </div>
+
+        <button
+          class="submit-btn"
+          type="submit"
+          [disabled]="registerForm.invalid || loading"
+        >
+          {{ loading ? 'Skapar konto...' : 'Skapa konto' }}
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </form>
+
+      <p class="login-link">
+        Har du redan ett konto?
+        <a routerLink="/login">Logga in</a>
+      </p>
+    </section>
+  </div>
+</div>

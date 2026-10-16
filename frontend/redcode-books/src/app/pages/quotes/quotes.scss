@@ -1,0 +1,293 @@
+
+:host {
+  display: block;
+}
+
+.quotes-page {
+  min-height: 100vh;
+  background: #080e1c;
+  color: #f8fafc;
+}
+
+.navbar-custom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 24px 7%;
+  border-bottom: 1px solid #ffffff12;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+  font-size: 21px;
+  font-weight: 800;
+  text-decoration: none;
+
+  i, .brand-accent {
+    color: #7796ff;
+  }
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+
+  a {
+    color: #929cb3;
+    text-decoration: none;
+
+    &:hover, &.active {
+      color: #fff;
+    }
+  }
+}
+
+.profile-btn {
+  padding: 11px 18px;
+  border: 1px solid #ffffff25;
+  border-radius: 12px;
+  background: #ffffff08;
+  color: #fff;
+}
+
+.quotes-hero {
+  padding: 60px;
+  border: 1px solid #ffffff14;
+  border-radius: 25px;
+  background: linear-gradient(120deg, #142c57, #101b35 65%, #111629);
+
+  h1 {
+    margin: 16px 0;
+    font-size: clamp(40px, 6vw, 65px);
+    font-weight: 800;
+
+    em {
+      color: #91aaff;
+      font-style: normal;
+    }
+  }
+
+  p {
+    max-width: 520px;
+    color: #b6c2d7;
+    line-height: 1.8;
+  }
+}
+
+.eyebrow {
+  color: #91aaff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.primary-btn {
+  margin-top: 20px;
+  padding: 14px 23px;
+  border: none;
+  border-radius: 12px;
+  background: #7996ff;
+  color: #071022;
+  font-weight: 700;
+}
+
+.quotes-section {
+  padding-top: 60px;
+}
+
+.section-heading {
+  margin-bottom: 30px;
+
+  h2 {
+    margin: 10px 0;
+    font-size: 32px;
+    font-weight: 800;
+  }
+
+  p, .muted {
+    color: #9ba9c0;
+  }
+}
+
+.quotes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.quote-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 240px;
+  padding: 28px;
+  border: 1px solid #ffffff14;
+  border-radius: 20px;
+  background: #121b2d;
+  transition: transform .25s, border-color .25s;
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: #7796ff77;
+  }
+
+  blockquote {
+    flex: 1;
+    margin: 20px 0 30px;
+    font-size: 19px;
+    line-height: 1.7;
+  }
+}
+
+.quote-icon {
+  color: #91aaff;
+  font-size: 27px;
+}
+
+.quote-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid #ffffff14;
+  color: #aab7cc;
+}
+
+.quote-actions {
+  display: flex;
+  gap: 14px;
+
+  button {
+    border: none;
+    background: transparent;
+    color: #aab7cc;
+
+    &:hover {
+      color: #91aaff;
+    }
+
+    &:last-child:hover {
+      color: #ff8d9a;
+    }
+  }
+}
+
+.empty-state {
+  padding: 55px;
+  border: 1px dashed #ffffff25;
+  border-radius: 20px;
+  text-align: center;
+  color: #9ba9c0;
+
+  > i {
+    margin-bottom: 15px;
+    font-size: 40px;
+    color: #91aaff;
+  }
+
+  h3 {
+    color: #fff;
+  }
+}
+
+.modal-backdrop-custom {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: #000b;
+  backdrop-filter: blur(8px);
+}
+
+.quote-modal {
+  width: 100%;
+  max-width: 480px;
+  padding: 32px;
+  border: 1px solid #ffffff20;
+  border-radius: 22px;
+  background: #111a2c;
+
+  label {
+    display: block;
+    margin: 20px 0 9px;
+    font-size: 13px;
+  }
+
+  input, textarea {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #ffffff20;
+    border-radius: 11px;
+    outline: none;
+    background: #0c1424;
+    color: #fff;
+
+    &:focus {
+      border-color: #7996ff;
+    }
+  }
+}
+
+.modal-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h2 {
+    font-size: 25px;
+    font-weight: 800;
+  }
+}
+
+.close-btn {
+  border: none;
+  background: transparent;
+  color: #aab5ca;
+  font-size: 22px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 25px;
+
+  .primary-btn {
+    margin-top: 0;
+  }
+}
+
+.cancel-btn {
+  padding: 13px 20px;
+  border: 1px solid #ffffff25;
+  border-radius: 12px;
+  background: transparent;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .navbar-custom {
+    flex-wrap: wrap;
+    padding: 20px;
+  }
+
+  .nav-links {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .quotes-hero {
+    padding: 35px 25px;
+  }
+
+  .quote-modal {
+    padding: 24px;
+  }
+}
