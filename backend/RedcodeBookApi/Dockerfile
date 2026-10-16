@@ -1,7 +1,9 @@
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
 
-COPY . .
+COPY backend/RedcodeBookApi/ ./backend/RedcodeBookApi/
+
+WORKDIR /src/backend/RedcodeBookApi
 
 RUN dotnet restore RedcodeBookApi.csproj
 RUN dotnet publish RedcodeBookApi.csproj -c Release -o /app/publish --no-restore
