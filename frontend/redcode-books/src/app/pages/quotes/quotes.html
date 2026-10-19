@@ -12,8 +12,9 @@
     </nav>
 
     
+    <div class="nav-actions">
     <button
-      class="theme-btn"
+      class="theme-toggle"
       type="button"
       (click)="theme.toggle()"
       [attr.aria-label]="theme.isLight() ? 'Aktivera mörkt tema' : 'Aktivera ljust tema'"
@@ -27,6 +28,7 @@
       <i class="fa-solid fa-arrow-right-from-bracket"></i>
       Logga ut
     </button>
+    </div>
   </header>
 
   <main class="container py-5">
